@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\testApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxDSHapVideoPlayer.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DSUncompressedSampleGrabber.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\amextra.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\amfilter.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\amvideo.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\arithutil.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\combase.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\cprop.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\ctlutil.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\ddmm.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\mtype.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\outputq.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\perflog.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\pstream.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\pullpin.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\refclock.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\renbase.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\schedule.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\seekpt.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\source.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\strmctl.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\sysclock.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\transfrm.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\transip.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\videoctl.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\vtrans.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\winctrl.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\winutil.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\wxdebug.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\wxlist.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\wxutil.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\External\DirectShow\BaseClasses\dllentry.cpp">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{51ac7912-ef2c-40e9-b5eb-a907f84e1e0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDSHapVideoPlayer">
+      <UniqueIdentifier>{5ece1e80-34b1-4fcb-90de-221b8239df13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDSHapVideoPlayer\src">
+      <UniqueIdentifier>{edb36c1f-6b8b-498e-bdf8-e917c049d84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDSHapVideoPlayer\include">
+      <UniqueIdentifier>{f3646cff-d377-401f-ac67-7a048245e7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDSHapVideoPlayer\include\External">
+      <UniqueIdentifier>{e9856c4e-b9d4-4944-8a8b-c8fc18c8ebc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDSHapVideoPlayer\include\External\DirectShow">
+      <UniqueIdentifier>{bc1aac60-5e0d-4ef1-b72f-b01913ec990a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses">
+      <UniqueIdentifier>{96501678-44ef-489f-812c-136c03386f0c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxDSHapVideoPlayer.h">
+      <Filter>addons\ofxDSHapVideoPlayer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DSUncompressedSampleGrabber.h">
+      <Filter>addons\ofxDSHapVideoPlayer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DSShared.h">
+      <Filter>addons\ofxDSHapVideoPlayer\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\amextra.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\amfilter.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\cache.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\checkbmi.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\combase.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\cprop.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\ctlutil.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\ddmm.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\dxmperf.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\fourcc.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\measure.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\msgthrd.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\mtype.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\outputq.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\perflog.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\perfstruct.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\pstream.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\pullpin.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\refclock.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\reftime.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\renbase.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\schedule.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\seekpt.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\source.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\streams.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\strmctl.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\sysclock.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\transfrm.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\transip.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\videoctl.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\vtrans.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\winctrl.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\winutil.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\wxdebug.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\wxlist.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\External\DirectShow\BaseClasses\wxutil.h">
+      <Filter>addons\ofxDSHapVideoPlayer\include\External\DirectShow\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="HapShared.h">
+      <Filter>addons\ofxDSHapVideoPlayer\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>

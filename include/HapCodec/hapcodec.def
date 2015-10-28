@@ -1,0 +1,4 @@
+LIBRARY         HAPCODEC
+
+EXPORTS
+	DriverProc

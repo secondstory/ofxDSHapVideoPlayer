@@ -1,0 +1,170 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include <windows.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 134, 133
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Configure Hap Codec"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "OK",IDC_OK,7,103,55,15
+    PUSHBUTTON      "Cancel",IDC_CANCEL,70,103,55,15
+    CONTROL         "Enable Null Frames",IDC_NULLFRAMES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,73,77,10
+    LTEXT           "Version 1.0.6",IDC_VERSION,83,0,42,10
+    CONTROL         "Use Snappy Compression",IDC_SNAPPY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,61,97,10
+    LTEXT           "DXT Quality",IDC_STATIC3,7,13,41,11
+    LISTBOX         IDC_DXTQUALITY_OPTIONS,7,24,84,30,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG2 DIALOGEX 0, 0, 252, 68
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Hap Codec"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "OK",IDC_OK,98,48,55,15
+    LTEXT           "DirectShow Hap codec ported by RenderHeads Ltd",IDC_VERSION,36,12,167,10
+    LTEXT           "Special thanks to Tom Butterworth, author of the Hap codec for VidVox",IDC_VERSION2,11,30,227,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 125
+        BOTTOMMARGIN, 125
+    END
+
+    IDD_DIALOG2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 238
+        BOTTOMMARGIN, 60
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", " "
+            VALUE "FileDescription", "HAP"
+            VALUE "FileVersion", "1.0.0"
+            VALUE "InternalName", "HAP"
+            VALUE "LegalCopyright", "Copyright © 2013"
+            VALUE "OriginalFilename", "hapcodec.dll"
+            VALUE "ProductName", "HAP Codec"
+            VALUE "ProductVersion", "1.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_TIP_NULLFRAMES      "When a frame is identical to the preceding frame, it can be replaced with a nullframe. This indicates that the program reading the video should simply reuse the previous frame. Nullframes can increase compression and speed, but there may be a few editing programs that do no handle them well; disable nullframes if you notice the wrong frame being displayed during still sections of a video."
+    IDS_TIP_SNAPPY          "If this enabled, HAP will use the fast lossless Snappy compression."
+    IDS_TIP_MODE_OPTION     "Specifies the mode for encoding.  HAP stores frames as 24-bit RGB, HAPA stores frames as 32-bit RGBA, HAP-HQ stores frames as 24-bit RGB but has better quality and larger file size."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
