@@ -6,32 +6,17 @@ void testApp::setup(){
 	ofSetFrameRate(60);
 	ofEnableAlphaBlending();
 
-	//dsPlayer.loadMovie("touchdown1.wmv");
-	//dsPlayer.loadMovie( "CokeRebootHap.avi" );
-	//dsPlayer.loadMovie("CokeRebootHapNoAlpha.avi");
-	//dsPlayer.loadMovie("sample-1080p30-Hap.avi"); // no workie, sample size isn't even
-	//dsPlayer.loadMovie("sample-1080p30-Hap_1.avi");
-	dsPlayer.loadMovie("sample-1080p30-Hap_2.avi"); // hapQ
-	//dsPlayer.loadMovie("ElectricFields.avi"); // audio
+	// download sample Hap file from 
+	// http://www.renderheads.com/downloads/2014/sample-1080p30-Hap.avi
+	dsPlayer.loadMovie("sample-1080p30-Hap.avi");
 
 	dsPlayer.play();
 
-	ofSetWindowShape(dsPlayer.getWidth()*0.5, dsPlayer.getHeight()*0.5);
+	ofSetWindowShape(dsPlayer.getWidth(), dsPlayer.getHeight());
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-
-	if (ofGetFrameNum() % 5 == -1){
-
-		int numFrames = dsPlayer.getTotalNumFrames();
-
-		int randFrame = ofRandom(numFrames);
-
-		dsPlayer.setFrame(randFrame);
-
-		ofLogNotice() << "fr " << randFrame;
-	}
 
 	dsPlayer.update();
 }
@@ -39,19 +24,12 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 
-	ofBackground(0, 255, 255);
-
-	ofPushMatrix();
-
-	ofScale(0.5, 0.5);
+	ofBackground(255);
 
 	ofSetColor(255);
 	dsPlayer.draw(0, 0);
 
-	ofPopMatrix();
-
 	ofDrawBitmapStringHighlight(ofToString(ofGetFrameRate(), 2), 10, 20);
-	//ofDrawBitmapStringHighlight(ofToString(dsPlayer.getCurrentFrame(), 3), 10, 45);
 	ofDrawBitmapStringHighlight(ofToString(dsPlayer.getPosition(), 3), 10, 70);
 }
 
