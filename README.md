@@ -40,8 +40,8 @@ void ofApp::draw(){
 
 *Notes*
 
-* ofxDSHapVideoPlayer does not currently support snappy compression. Do not use this option when exporting Hap-encoded files. 
-
 * ofxDSHapVideoPlayer plays back Hap videos in .avi containers. It will not play back Hap-encoded video files in QuickTime movie containers. Encode Windows .avi files using Adobe Media Encoder, After Effects or other.
 
 * Sample Hap video files are available on http://renderheads.com/product/hap-for-directshow/
+
+* ofxDSHapVideoPlayer now supports snappy compression, but the performance is not as snappy.
