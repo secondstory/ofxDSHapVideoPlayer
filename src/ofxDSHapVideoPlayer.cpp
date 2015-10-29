@@ -1,3 +1,5 @@
+
+//ofxDSHapVideoPlayer written by Jeremy Rotsztain and Philippe Laurheret for Second Story, 2015
 //DirectShowVideo and ofDirectShowPlayer written by Theodore Watson, Jan 2014
 //Code is based off of examples provided by MSDN, the videoInput library, http://www.codeproject.com/Articles/30450/A-simple-console-DirectShow-player 
 //and http://www.geekpage.jp/en/programming/directshow/
@@ -8,11 +10,12 @@
 #include <tchar.h>
 #include <stdio.h>
 #include <strsafe.h>
+#include <stdint.h>
 #include "ofxDSHapVideoPlayer.h"
 #pragma comment(lib,"Strmiids.lib")
 #include "DSShared.h"
 #include "DSUncompressedSampleGrabber.h"
-
+#include "snappy-c.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,6 +175,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 		HRESULT hr = pSample->GetPointer(&ptrBuffer);
 
 		if (hr == S_OK){
+
 			long latestBufferLength = pSample->GetActualDataLength();
 			//printf("Buffer len %i %i\n", (int)latestBufferLength, (int)videoSize);
 			//printf("Expected len %i\n", width * height / 2);
@@ -179,18 +183,35 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 			// length hidden in 4-byte header
 			int sz = (*(uint8_t *)ptrBuffer) + ((*((uint8_t *)(ptrBuffer)+1)) << 8) + ((*((uint8_t *)(ptrBuffer)+2)) << 16);
 
-			//printf("Encoded len %i\n", sz);
-			//printf("Example len %i\n", ((width + 3) / 4)*((height + 3) / 4) * 8);
+			
 
-			lastBufferSize = ((width + 3) / 4)*((height + 3) / 4) * 8;
+			// 1036800
+
+			size_t uncompressedLen = ((width + 3) / 4)*((height + 3) / 4) * 8;
+			
+			lastBufferSize = uncompressedLen;
 			//lastBufferSize = sz;
 
 			if (rawBuffer != NULL){ // latestBufferLength == videoSize && 
 				
 				EnterCriticalSection(&critSection);
 
-				// copy buffer minus 4 byte yeader
-				memcpy(rawBuffer, ptrBuffer + 4, sz);
+				if( sz == uncompressedLen ){
+
+					// copy buffer minus 4 byte yeader
+					memcpy(rawBuffer, ptrBuffer + 4, sz);
+				
+				} else {
+
+					printf("we've got snappy compression!\n");
+					printf("Encoded len %i\n", sz);
+					printf("Expected len %i\n", ((width + 3) / 4)*((height + 3) / 4) * 8);
+					printf("Buffer size %i\n\n", videoSize);
+
+					uncompressedLen = videoSize; //?
+
+					snappy_uncompress( (const char*)ptrBuffer+4, sz, (char*)rawBuffer, &uncompressedLen);
+				}
 
 				bNewPixels = true;
 
@@ -202,7 +223,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 				LeaveCriticalSection(&critSection);
 			}
 			else{
-				printf("ERROR: SampleCB() - buffer sizes do not match\n");
+				printf("ERROR: SampleCB() - raw buffer is NULL\n");
 			}
 		}
 
@@ -535,14 +556,17 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 
 			if (bitmapheader->biCompression == FOURCC_HAP)
 			{
+				printf("texture format is HapTextureFormat_RGB_DXT1\n");
 				this->textureFormat = HapTextureFormat_RGB_DXT1;
 			}
 			else if (bitmapheader->biCompression == FOURCC_HAPA)
 			{
+				printf("texture format is HapTextureFormat_RGBA_DXT5\n");
 				this->textureFormat = HapTextureFormat_RGBA_DXT5;
 			}
 			else if (bitmapheader->biCompression == FOURCC_HAPQ)
 			{
+				printf("texture format is HapTextureFormat_YCoCg_DXT5\n");
 				this->textureFormat = HapTextureFormat_YCoCg_DXT5;
 			}
 			else 
@@ -1050,6 +1074,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+#define STRINGIFY(x) #x
 
 ofxDSHapVideoPlayer::ofxDSHapVideoPlayer(){
 	player = NULL;
@@ -1120,8 +1145,7 @@ bool ofxDSHapVideoPlayer::loadMovie(string path) {
          string ofxHapPlayerVertexShader;
          if (ofIsGLProgrammableRenderer())
          {
-            ofxHapPlayerVertexShader = R"(
-                #version 400
+            ofxHapPlayerVertexShader = "#version 400\n" STRINGIFY(
                 uniform mat4 modelViewMatrix;
                 uniform mat4 modelViewProjectionMatrix;
                 layout (location = 0) in vec4 position;
@@ -1132,21 +1156,23 @@ bool ofxDSHapVideoPlayer::loadMovie(string path) {
                     v_texcoord = texcoord;
                     gl_Position = modelViewProjectionMatrix * position;
                 }
-            )";
+            );
          }
          else
          {
-		    ofxHapPlayerVertexShader = R"(void main(void)
+		    ofxHapPlayerVertexShader = STRINGIFY(
+				void main(void)
 				{
                     gl_Position = ftransform();
                     gl_TexCoord[0] = gl_MultiTexCoord0;
-				})";
+				});
          }
 
          string ofxHapPlayerFragmentShader;
          if (ofIsGLProgrammableRenderer())
          {
-             ofxHapPlayerFragmentShader = R"(uniform sampler2D src_tex0;
+             ofxHapPlayerFragmentShader = "#version 400\n" STRINGIFY(
+				uniform sampler2D src_tex0;
                 in vec2 v_texcoord;
                 uniform float width;
                 uniform float height;
@@ -1161,11 +1187,11 @@ bool ofxDSHapVideoPlayer::loadMovie(string path) {
 					float Y = CoCgSY.w;
 					vec4 rgba = vec4(Y + Co - Cg, Y + Cg, Y - Co - Cg, 1.0);
 					gl_FragColor = rgba;
-				})";
+				});
          }
          else
          {
-		    ofxHapPlayerFragmentShader = R"(
+		    ofxHapPlayerFragmentShader = STRINGIFY(
                 uniform sampler2D cocgsy_src;
 			    const vec4 offsets = vec4(-0.50196078431373, -0.50196078431373, 0.0, 0.0);
 				void main()
@@ -1178,7 +1204,7 @@ bool ofxDSHapVideoPlayer::loadMovie(string path) {
 					float Y = CoCgSY.w;
 					vec4 rgba = vec4(Y + Co - Cg, Y + Cg, Y - Co - Cg, 1.0);
 					gl_FragColor = rgba;
-				})";
+				});
          }
 
 		 bool bShaderOK = shader.setupShaderFromSource(GL_VERTEX_SHADER, ofxHapPlayerVertexShader);
