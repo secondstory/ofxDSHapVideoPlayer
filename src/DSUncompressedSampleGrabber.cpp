@@ -19,7 +19,7 @@ ULONG CBaseFilter::NonDelegatingRelease(void)
 DSUncompressedSampleGrabber::DSUncompressedSampleGrabber(IUnknown * pOuter, HRESULT * phr, BOOL ModifiesData)
 	: CVideoTransformFilter(FILTERNAME, (IUnknown*)pOuter, CLSID_SampleGrabber) {
 	callback = NULL;
-	printf("DSUncompressedSampleGrabber()\n");
+	//printf("DSUncompressedSampleGrabber()\n");
 }
 
 DSUncompressedSampleGrabber::~DSUncompressedSampleGrabber() {
@@ -27,7 +27,7 @@ DSUncompressedSampleGrabber::~DSUncompressedSampleGrabber() {
 }
 
 CUnknown *WINAPI DSUncompressedSampleGrabber::CreateInstance(LPUNKNOWN punk, HRESULT *phr) {
-	printf("CreateInstance()\n");
+	//printf("CreateInstance()\n");
 	HRESULT hr;
 	if (!phr)
 		phr = &hr;
@@ -70,11 +70,11 @@ HRESULT STDMETHODCALLTYPE DSUncompressedSampleGrabber::SetMediaType(const AM_MED
 HRESULT DSUncompressedSampleGrabber::SetMediaType(PIN_DIRECTION direction, const CMediaType *pmt)
 {
 
-	printf("SetMediaType()\n");
-	printf("major type %i, subtype %i\n", pmt->majortype, pmt->subtype);
-	printf("matching major type %i, matching subtype %i\n", (pmt->majortype == MEDIATYPE_Video), pmt->subtype == MEDIASUBTYPE_Avi);
-	printf("formattype %i\n", pmt->formattype == FORMAT_VideoInfo);
-	printf("cbformat %i, null %i\n", pmt->cbFormat >= sizeof(VIDEOINFOHEADER), pmt->pbFormat != NULL);
+	//printf("SetMediaType()\n");
+	//printf("major type %i, subtype %i\n", pmt->majortype, pmt->subtype);
+	//printf("matching major type %i, matching subtype %i\n", (pmt->majortype == MEDIATYPE_Video), pmt->subtype == MEDIASUBTYPE_Avi);
+	//printf("formattype %i\n", pmt->formattype == FORMAT_VideoInfo);
+	//printf("cbformat %i, null %i\n", pmt->cbFormat >= sizeof(VIDEOINFOHEADER), pmt->pbFormat != NULL);
 
 	HRESULT hr = S_OK;
 
@@ -160,17 +160,17 @@ HRESULT DSUncompressedSampleGrabber::Transform(IMediaSample * pIn, IMediaSample 
 
 HRESULT DSUncompressedSampleGrabber::CheckTransform(const CMediaType* mtIn, const CMediaType* mtOut){
 
-	printf("DSUncompressedSampleGrabber::CheckTransform\n");
+	//printf("DSUncompressedSampleGrabber::CheckTransform\n");
 
 	if (mtIn->formattype == FORMAT_VideoInfo){
 
-		printf("FORMAT_VideoInfo\n");
+		//printf("FORMAT_VideoInfo\n");
 
 		//VIDEOINFOHEADER2 * vih2 = (VIDEOINFOHEADER*)mtIn->Format();
 
 		BITMAPINFOHEADER * pbih = &((VIDEOINFOHEADER*)mtIn->Format())->bmiHeader;
 
-		printf("Dim %i %i\n", (int)pbih->biWidth, (int)pbih->biHeight);
+		//printf("Dim %i %i\n", (int)pbih->biWidth, (int)pbih->biHeight);
 
 
 	}
@@ -188,7 +188,7 @@ HRESULT DSUncompressedSampleGrabber::DecideBufferSize(IMemAllocator *pAlloc, ALL
 	ASSERT(pProperties);
 	HRESULT hr = NOERROR;
 
-	printf("sample size %i\n", m_pInput->CurrentMediaType().GetSampleSize());
+	//printf("sample size %i\n", m_pInput->CurrentMediaType().GetSampleSize());
 
 	pProperties->cBuffers = 1;
 	pProperties->cbBuffer = 1; // 1920 * 1080 * 4;
@@ -288,7 +288,7 @@ HRESULT STDMETHODCALLTYPE DSUncompressedSampleGrabber::GetCurrentSample(IMediaSa
 
 HRESULT STDMETHODCALLTYPE DSUncompressedSampleGrabber::SetCallback(ISampleGrabberCB *pCallback, long WhichMethodToCallback)
 {
-	printf("SetCallback()\n");
+	//printf("SetCallback()\n");
 	this->pCallback = pCallback;
 
 	return S_OK;

@@ -66,6 +66,13 @@ public:
 	HRESULT DecideBufferSize(IMemAllocator * pAlloc, ALLOCATOR_PROPERTIES * pProperties);
 	HRESULT GetMediaType(int iPosition, CMediaType * pMediaType);
 
+	/*
+	STDMETHODIMP_(ULONG) Release(){
+		delete this;
+		return 0;
+	}
+	*/
+
 	HRESULT STDMETHODCALLTYPE SetOneShot(BOOL OneShot);
 	HRESULT STDMETHODCALLTYPE SetMediaType(const AM_MEDIA_TYPE *pType);
 	HRESULT STDMETHODCALLTYPE GetConnectedMediaType(AM_MEDIA_TYPE *pType);
