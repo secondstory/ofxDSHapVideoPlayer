@@ -91,7 +91,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDSHapVideoPlayer\src\DSUncompressedSampleGrabber.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDSHapVideoPlayer\src\ofxDSHapVideoPlayer.cpp" />
     <ClCompile Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\DirectShow\BaseClasses\amextra.cpp" />
@@ -129,9 +128,9 @@
     <ClCompile Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\snappy\snappy-sinksource.cc" />
     <ClCompile Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\snappy\snappy-stubs-internal.cc" />
     <ClCompile Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\snappy\snappy.cc" />
+    <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\addons\ofxDSHapVideoPlayer\src\DSShared.h" />
     <ClInclude Include="..\..\..\addons\ofxDSHapVideoPlayer\src\DSUncompressedSampleGrabber.h" />
     <ClInclude Include="..\..\..\addons\ofxDSHapVideoPlayer\src\HapShared.h" />
@@ -180,6 +179,7 @@
     <ClInclude Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\snappy\snappy-stubs-internal.h" />
     <ClInclude Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\snappy\snappy-stubs-public.h" />
     <ClInclude Include="..\..\..\addons\ofxDSHapVideoPlayer\libs\External\snappy\snappy.h" />
+    <ClInclude Include="src\ofApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
