@@ -8,11 +8,14 @@ void ofApp::setup(){
 
 	// download sample Hap file from 
 	// http://www.renderheads.com/downloads/2014/sample-1080p30-Hap.avi
-	dsPlayer.loadMovie("sample-1080p30-Hap.avi");
+	bool bOK = dsPlayer.loadMovie("sample-1080p30-Hap.avi");
 
-	dsPlayer.play();
+	if( bOK ){
 
-	ofSetWindowShape(dsPlayer.getWidth(), dsPlayer.getHeight());
+		ofSetWindowShape(dsPlayer.getWidth(), dsPlayer.getHeight());
+
+		dsPlayer.play();
+	}
 }
 
 //--------------------------------------------------------------
@@ -30,7 +33,7 @@ void ofApp::draw(){
 	dsPlayer.draw(0, 0);
 
 	ofDrawBitmapStringHighlight(ofToString(ofGetFrameRate(), 2), 10, 20);
-	ofDrawBitmapStringHighlight(ofToString(dsPlayer.getPosition(), 3), 10, 70);
+	ofDrawBitmapStringHighlight(ofToString(dsPlayer.getPosition(), 3), 10, 45);
 }
 
 //--------------------------------------------------------------

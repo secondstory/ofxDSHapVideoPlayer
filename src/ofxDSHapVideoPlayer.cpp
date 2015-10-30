@@ -64,7 +64,9 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 	}
 
 	void tearDown(){
-		//printf("tearDown\n"); 
+		
+		//printf("tearDown()\n"); 
+		
 		if (controlInterface){
 			controlInterface->Stop();
 			controlInterface->Release();
@@ -78,32 +80,35 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 		if (audioInterface){
 			audioInterface->Release();
 		}
-
 		if (positionInterface){
 			positionInterface->Release();
-		}
-		if (asyncReaderFilter){
-			asyncReaderFilter->Release();
 		}
 		if (asyncReaderFilterInterface){
 			asyncReaderFilterInterface->Release();
 		}
+		if (filterGraphManager){
+			this->filterGraphManager->RemoveFilter(this->aviSplitterFilter);
+			this->filterGraphManager->RemoveFilter(this->asyncReaderFilter);
+			this->filterGraphManager->RemoveFilter(this->rawSampleGrabberFilter);
+			this->filterGraphManager->RemoveFilter(this->nullRendererFilter);
+            this->filterGraphManager->RemoveFilter(this->audioRendererFilter);
+			filterGraphManager->Release();
+		}
 		if (aviSplitterFilter){
 			aviSplitterFilter->Release();
+		}
+		if (asyncReaderFilter){
+			asyncReaderFilter->Release();
+		}
+		if (nullRendererFilter){
+			nullRendererFilter->Release();
 		}
 		if (audioRendererFilter){
 			audioRendererFilter->Release();
 		}
 		if (rawSampleGrabberFilter){
-			//delete rawSampleGrabber;
+			rawSampleGrabberFilter->SetCallback(NULL, 0);
 			rawSampleGrabberFilter->Release();
-		}
-		if (nullRendererFilter){
-			nullRendererFilter->Release();
-		}
-
-		if (filterGraphManager){
-			filterGraphManager->Release();
 		}
 		if(rawBuffer){
 			delete[] rawBuffer;
@@ -112,6 +117,9 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 	}
 
 	void clearValues(){
+
+		//cout << "clearValues()\n";
+
 		hr = 0;
 
 		filterGraphManager = NULL;
@@ -203,10 +211,10 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 				
 				} else {
 
-					printf("we've got snappy compression!\n");
-					printf("Encoded len %i\n", sz);
-					printf("Expected len %i\n", ((width + 3) / 4)*((height + 3) / 4) * 8);
-					printf("Buffer size %i\n\n", videoSize);
+					//printf("we've got snappy compression!\n");
+					//printf("Encoded len %i\n", sz);
+					//printf("Expected len %i\n", ((width + 3) / 4)*((height + 3) / 4) * 8);
+					//printf("Buffer size %i\n\n", videoSize);
 
 					uncompressedLen = videoSize; //?
 
@@ -243,28 +251,113 @@ class DirectShowHapVideo : public ISampleGrabberCB {
         bool success = true;
         
         this->createFilterGraphManager(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->createAsyncReaderFilter(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->createAviSplitterFilter(success);
-        this->createRawSampleGrabberFilter(success);
+        
+		if (success == false){
+            tearDown();
+            return false;
+        }
+		
+		this->createRawSampleGrabberFilter(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->createNullRendererFilter(success);
 
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->querySeekInterface(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->queryPositionInterface(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->queryAudioInterface(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->queryControlInterface(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->queryEventInterface(success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
 
         this->queryAsyncReadFilterInterface(success);
 
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->addFilter(this->aviSplitterFilter, L"AVISplitter", success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->addFilter(this->asyncReaderFilter, L"AsyncReader", success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->addFilter(this->rawSampleGrabberFilter, L"RawSampleGrabber", success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
+
         this->addFilter(this->nullRendererFilter, L"Render", success);
+
+		if (success == false){
+            tearDown();
+            return false;
+        }
 
         this->asyncReaderFilterInterfaceLoad(path, success);
 
-        if (success == false)
-        {
+        if (success == false){
             tearDown();
             return false;
         }
@@ -382,6 +475,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 
 		HRESULT hr = asyncReaderFilterInterface->Load(filePathW.c_str(), NULL);
 		if (FAILED(hr)){
+			ofLogError( "ofxDSHapVideoPlayer" ) << "Failed to load file " << path;
 			success = false;
 		}
     }
@@ -404,6 +498,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
     void createRawSampleGrabberFilter(bool &success) {
         HRESULT hr = 0;
 		this->rawSampleGrabberFilter = (DSUncompressedSampleGrabber*)DSUncompressedSampleGrabber::CreateInstance(NULL, &hr);
+		this->rawSampleGrabberFilter->AddRef();
 		if (FAILED(hr)){
 			success = false;
 		}
@@ -543,30 +638,30 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 			this->averageTimePerFrame = infoheader->AvgTimePerFrame / 10000000.0;
 			this->videoSize = infoheader->bmiHeader.biSizeImage; // how many pixels to allocate
 
-			printf("dims %i %i %i\n", width, height, videoSize);
+			//printf("dims %i %i %i\n", width, height, videoSize);
 
 			BITMAPINFOHEADER * bitmapheader = &((VIDEOINFOHEADER*)mt.pbFormat)->bmiHeader;
 
 			//printf("test %i\n", bitmapheader->biCompression == FOURCC_DXT5);
 			//printf("test %i\n", bitmapheader->biCompression == FOURCC_dxt5);
-			printf("hap %i\n", bitmapheader->biCompression == FOURCC_HAP);
-			printf("hapa %i\n", bitmapheader->biCompression == FOURCC_HAPA);
-			printf("hapq %i\n", bitmapheader->biCompression == FOURCC_HAPQ); // this works
+			//printf("hap %i\n", bitmapheader->biCompression == FOURCC_HAP);
+			//printf("hapa %i\n", bitmapheader->biCompression == FOURCC_HAPA);
+			//printf("hapq %i\n", bitmapheader->biCompression == FOURCC_HAPQ); // this works
 			//printf("test %i\n", bitmapheader->biCompression == FOURCC_hapa);
 
 			if (bitmapheader->biCompression == FOURCC_HAP)
 			{
-				printf("texture format is HapTextureFormat_RGB_DXT1\n");
+				//printf("texture format is HapTextureFormat_RGB_DXT1\n");
 				this->textureFormat = HapTextureFormat_RGB_DXT1;
 			}
 			else if (bitmapheader->biCompression == FOURCC_HAPA)
 			{
-				printf("texture format is HapTextureFormat_RGBA_DXT5\n");
+				//printf("texture format is HapTextureFormat_RGBA_DXT5\n");
 				this->textureFormat = HapTextureFormat_RGBA_DXT5;
 			}
 			else if (bitmapheader->biCompression == FOURCC_HAPQ)
 			{
-				printf("texture format is HapTextureFormat_YCoCg_DXT5\n");
+				//printf("texture format is HapTextureFormat_YCoCg_DXT5\n");
 				this->textureFormat = HapTextureFormat_YCoCg_DXT5;
 			}
 			else 
@@ -611,7 +706,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 
 			if (pinfo.dir == PINDIR_OUTPUT){
 
-				wprintf(L"name %s\n", pinfo.achName);
+				//wprintf(L"name %s\n", pinfo.achName);
 
 				// check to see if avi splitter has audio output
 
@@ -1221,7 +1316,7 @@ bool ofxDSHapVideoPlayer::loadMovie(string path) {
 
 		 if (bShaderOK){
 
-			 ofLogNotice("ofxDSHapVideoPlayer") << "Hap shader created";
+			 //ofLogNotice("ofxDSHapVideoPlayer") << "Hap shader created";
 			 bShaderInitialized = true;
 		 }
 		 else {
