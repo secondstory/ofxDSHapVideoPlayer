@@ -186,6 +186,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 		if (hr == S_OK){
 
 			long latestBufferLength = pSample->GetActualDataLength();
+			
 			//printf("Buffer len %i %i\n", (int)latestBufferLength, (int)videoSize);
 			//printf("Expected len %i\n", width * height / 2);
 
@@ -224,7 +225,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 
 				bNewPixels = true;
 
-                this->cond.broadcast();
+                //this->cond.broadcast();
 
 				//this is just so we know if there is a new frame
 				frameCount++;
@@ -1099,6 +1100,8 @@ class DirectShowHapVideo : public ISampleGrabberCB {
 		return hr;
 	}
 
+	/*
+
     Poco::Mutex mutex;
     Poco::Condition cond;
 
@@ -1110,7 +1113,7 @@ class DirectShowHapVideo : public ISampleGrabberCB {
         return this->cond;
     }
 
-
+	*/
 
 	protected:
 
@@ -1183,7 +1186,7 @@ ofxDSHapVideoPlayer::~ofxDSHapVideoPlayer(){
 	close();
 }
 
-bool ofxDSHapVideoPlayer::loadMovie(string path) {
+bool ofxDSHapVideoPlayer::load(string path) {
 
 	path = ofToDataPath(path); 
 
@@ -1206,17 +1209,19 @@ bool ofxDSHapVideoPlayer::loadMovie(string path) {
 
 			 textureFormat = player->getHapTextureFormat();
 
+			 //tex.texData.glInternalFormat
+
 			 if (textureFormat == HapTextureFormat_RGB_DXT1){
-				 texData.glTypeInternal = GL_COMPRESSED_RGB_S3TC_DXT1_EXT; 
+				 texData.glInternalFormat = GL_COMPRESSED_RGB_S3TC_DXT1_EXT;
 				 pix.allocate(width, height, OF_IMAGE_COLOR);
 			 }
 			 else if (textureFormat == HapTextureFormat_RGBA_DXT5){
-				 texData.glTypeInternal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; 
+				 texData.glInternalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 				 pix.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
 			 }
 			 else {
 				 ofLogNotice() << "HAPQ";
-				 texData.glTypeInternal = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+				 texData.glInternalFormat = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 				 pix.allocate(width, height, OF_IMAGE_COLOR);
 			 }
 
@@ -1358,6 +1363,7 @@ void ofxDSHapVideoPlayer::update(){
 }
 
 void ofxDSHapVideoPlayer::waitUpdate(long milliseconds){
+	/*
     if (player && player->isLoaded()){
         Poco::Mutex& mutex = this->player->getMutex();
         mutex.lock();
@@ -1369,6 +1375,7 @@ void ofxDSHapVideoPlayer::waitUpdate(long milliseconds){
         mutex.unlock();
 		player->update();
 	}
+	*/
 }
 
 void ofxDSHapVideoPlayer::writeToTexture(ofTexture &texture) {
@@ -1395,7 +1402,7 @@ void ofxDSHapVideoPlayer::writeToTexture(ofTexture &texture) {
         //dataLength = player->getBufferSize(); 
         glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_COMPRESSED_IMAGE_SIZE, &dataLength);
     }
-    glCompressedTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, texData.glTypeInternal, dataLength, pix.getPixels());
+    glCompressedTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, texData.glInternalFormat, dataLength, pix.getPixels());
 
     GLenum err = glGetError();
 
@@ -1450,26 +1457,32 @@ void ofxDSHapVideoPlayer::stop(){
 	}
 }		
 
-bool ofxDSHapVideoPlayer::isFrameNew(){
+bool ofxDSHapVideoPlayer::isFrameNew() const {
 	return ( player && player->isFrameNew() ); 
 }
 
-unsigned char * ofxDSHapVideoPlayer::getPixels(){
-	return pix.getPixels();
-}
-	
-ofPixelsRef ofxDSHapVideoPlayer::getPixelsRef(){
-	return pix; 
+ofPixels & ofxDSHapVideoPlayer::getPixels(){
+	return pix;
 }
 
-float ofxDSHapVideoPlayer::getWidth(){
+const ofPixels & ofxDSHapVideoPlayer::getPixels() const {
+	return pix;
+}
+	
+/*
+unsigned char* ofxDSHapVideoPlayer::getPixels(){
+	return pix.getPixels(); 
+}
+*/
+
+float ofxDSHapVideoPlayer::getWidth() const  {
 	if( player && player->isLoaded() ){
 		return player->getWidth();
 	}
 	return 0.0; 
 }
 
-float ofxDSHapVideoPlayer::getHeight(){
+float ofxDSHapVideoPlayer::getHeight() const {
 	if( player && player->isLoaded() ){
 		return player->getHeight();
 	}
@@ -1480,15 +1493,15 @@ ofShader ofxDSHapVideoPlayer::getShader() {
     return this->shader;
 }
 	
-bool ofxDSHapVideoPlayer::isPaused(){
+bool ofxDSHapVideoPlayer::isPaused() const {
 	return ( player && player->isPaused() ); 
 }
 
-bool ofxDSHapVideoPlayer::isLoaded(){
+bool ofxDSHapVideoPlayer::isLoaded() const  {
 	return ( player && player->isLoaded() ); 
 }
 
-bool ofxDSHapVideoPlayer::isPlaying(){
+bool ofxDSHapVideoPlayer::isPlaying() const  {
 	return ( player && player->isPlaying() ); 
 }	
 
@@ -1496,7 +1509,7 @@ bool ofxDSHapVideoPlayer::setPixelFormat(ofPixelFormat pixelFormat){
 	return (pixelFormat == OF_PIXELS_RGBA);
 }
 
-ofPixelFormat ofxDSHapVideoPlayer::getPixelFormat(){
+ofPixelFormat ofxDSHapVideoPlayer::getPixelFormat() const  {
 	return OF_PIXELS_RGBA; 
 }
 		
@@ -1564,21 +1577,21 @@ void ofxDSHapVideoPlayer::setSpeed(float speed){
 	}
 }
 	
-int	ofxDSHapVideoPlayer::getCurrentFrame(){
+int	ofxDSHapVideoPlayer::getCurrentFrame() const {
 	if( player && player->isLoaded() ){
 		return player->getCurrentFrame();
 	}
 	return 0; 
 }
 
-int	ofxDSHapVideoPlayer::getTotalFrames(){
+int	ofxDSHapVideoPlayer::getTotalFrames() const {
 	if( player && player->isLoaded() ){
 		return player->getTotalFrames();
 	}
 	return 0; 
 }
 
-ofLoopType ofxDSHapVideoPlayer::getLoopState(){
+ofLoopType ofxDSHapVideoPlayer::getLoopState() const {
 	if( player ){
 		if( player->isLooping() ){
 			return OF_LOOP_NORMAL;

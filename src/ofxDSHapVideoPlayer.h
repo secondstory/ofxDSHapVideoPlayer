@@ -17,7 +17,7 @@ class ofxDSHapVideoPlayer : public ofBaseVideoPlayer {
 		ofxDSHapVideoPlayer();
 		~ofxDSHapVideoPlayer();
 
-		bool loadMovie(string path);
+		bool load(string path);
 		void update();
 		void waitUpdate(long milliseconds);
 		void writeToTexture(ofTexture& texture);
@@ -29,22 +29,22 @@ class ofxDSHapVideoPlayer : public ofBaseVideoPlayer {
 		 void				pause();
 		 void				stop();		
 	
-		 bool 				isFrameNew();
-		 unsigned char * 	getPixels(); // @NOTE: return uncompressed pixels
-	     ofPixelsRef		getPixelsRef();
+		 bool 				isFrameNew() const ;
+		 ofPixels &		 	getPixels(); // @NOTE: return uncompressed pixels
+		 const ofPixels &    getPixels() const;
+	     //unsigned char *	getPixels();
 	
-		 float 				getWidth();
-		 float 				getHeight();
+		 float 				getWidth() const;
+		 float 				getHeight() const;
 	
-		 bool				isPaused();
-		 bool				isLoaded();
-		 bool				isPlaying();
+		 bool				isPaused() const;
+		 bool				isLoaded() const;
+		 bool				isPlaying() const;
 	
 		 bool setPixelFormat(ofPixelFormat pixelFormat);
-		 ofPixelFormat 		getPixelFormat();
+		 ofPixelFormat 		getPixelFormat() const;
          ofShader           getShader();
          ofTexture *        getTexture();
-
 
 		 float 				getPosition();
 		 float 				getSpeed();
@@ -58,9 +58,9 @@ class ofxDSHapVideoPlayer : public ofBaseVideoPlayer {
 		 void   			setSpeed(float speed);
 		 void				setFrame(int frame);  // frame 0 = first frame...
 	
-		 int				getCurrentFrame();
-		 int				getTotalFrames();
-		 ofLoopType			getLoopState();
+		 int				getCurrentFrame() const;
+		 int				getTotalFrames() const;
+		 ofLoopType			getLoopState() const;
 	
 		 void				firstFrame();
 		 void				nextFrame();
