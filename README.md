@@ -22,7 +22,7 @@ In ofApp.cpp
 ```c++
 void ofApp::setup(){
 
-	videoPlayer.loadVideo("HapVideo.avi");
+	videoPlayer.load("HapVideo.avi");
 	videoPlayer.play();
 }
 
@@ -45,3 +45,5 @@ void ofApp::draw(){
 * Sample Hap video files are available on http://renderheads.com/product/hap-for-directshow/
 
 * ofxDSHapVideoPlayer now supports snappy compression, but the performance is not as snappy.
+
+* This addon works with openFrameworks 0.9.0. For 0.8.4, use release 1.0.0 (https://github.com/secondstory/ofxDSHapVideoPlayer/releases/tag/v1.0.0)
