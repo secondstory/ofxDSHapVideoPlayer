@@ -6,6 +6,7 @@
 //This code is free to be used in any manner with or without attribution. 
 //No warrenty is offered or implied. 
 
+#include "ofMain.h"
 #include <Windows.h>
 #include <tchar.h>
 #include <stdio.h>
