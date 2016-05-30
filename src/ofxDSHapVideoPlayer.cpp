@@ -1564,7 +1564,7 @@ void ofxDSHapVideoPlayer::setLoopState(ofLoopType state){
 			player->setLoop(false);
 		}
 		else if( state == OF_LOOP_NORMAL ){
-			player->setLoop(false);
+			player->setLoop(true);
 		}else{
 			ofLogError("ofDirectShowPlayer") << " cannot set loop of type palindrome " << endl;
 		}
