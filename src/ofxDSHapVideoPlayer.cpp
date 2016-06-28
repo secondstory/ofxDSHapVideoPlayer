@@ -1275,6 +1275,7 @@ bool ofxDSHapVideoPlayer::load(string path) {
              ofxHapPlayerFragmentShader = "#version 400\n" STRINGIFY(
 				uniform sampler2D src_tex0;
                 in vec2 v_texcoord;
+				out vec4 v_fragColor;
                 uniform float width;
                 uniform float height;
 			    const vec4 offsets = vec4(-0.50196078431373, -0.50196078431373, 0.0, 0.0);
@@ -1287,7 +1288,7 @@ bool ofxDSHapVideoPlayer::load(string path) {
 					float Cg = CoCgSY.y / scale;
 					float Y = CoCgSY.w;
 					vec4 rgba = vec4(Y + Co - Cg, Y + Cg, Y - Co - Cg, 1.0);
-					gl_FragColor = rgba;
+					v_fragColor = rgba;
 				});
          }
          else
