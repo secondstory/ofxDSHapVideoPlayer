@@ -1424,8 +1424,6 @@ void ofxDSHapVideoPlayer::writeToTexture(ofTexture &texture) {
 
 void ofxDSHapVideoPlayer::draw(int x, int y, int w, int h){
 
-	ofSetColor(255);
-
 	if (textureFormat == HapTextureFormat_YCoCg_DXT5) shader.begin();
 
 	tex.draw(x, y, w, h);
