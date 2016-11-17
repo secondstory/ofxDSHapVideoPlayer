@@ -680,6 +680,14 @@ class DirectShowHapVideo : public ISampleGrabberCB {
             success = false;
 		}
 		else{
+			
+			if (videoSize == 0) {
+
+				ofLogWarning("ofxDSHapVideoPlayer") << "Video frame size not encoded in file header";
+
+				videoSize =  width * height * (this->textureFormat == HapTextureFormat_RGBA_DXT5 ? 4 : 3);
+			}
+			
 			this->rawBuffer = new unsigned char[videoSize];
 		}
 
